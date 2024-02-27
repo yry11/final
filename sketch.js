@@ -80,7 +80,7 @@ function draw() {
     timer++;
     back++
   // background(0, 1, 95);
-  if (back = 5500) {
+  if (back = 2500) {
   // background(0, 1, 95);
    background(255,1);
    back=0
@@ -321,7 +321,7 @@ class Circle {
       this.r += this.plusC;
     } else if (this.r >= 30 && this.r < 50) {
       this.r += this.plusB;
-    } else if (this.r >= 50 && this.r < random(60, 80)) {
+    } else if (this.r >= 50 && this.r < random(60, 100)) {
       this.r += this.plusA;
     }
   }
@@ -392,7 +392,7 @@ class Shape {
     this.oxRandom = random(-300, 300);
     this.oyRandom = random(-300, 300);
     this.r = [];
-    this.rMax = random(40, 100);
+    this.rMax = random(60, 130);
     this.rNow = 0;
     this.rCount = 0;
     this.flowerNum = random(flowerArray);
