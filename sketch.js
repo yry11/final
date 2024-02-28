@@ -68,7 +68,7 @@ function init() {
 }
 
 function draw() {
-  if (timer = 600) {
+  if (timer = 1000) {
     // background(0, 1, 95);
      background(255,3);
      timer=0
@@ -295,7 +295,7 @@ class Circle {
     // this.randomScheme = colorScheme[this.randomSchemeIndex];
     this.randomScheme = colorScheme[currSchemeIndex];
     this.randomColorIndex = Math.floor(Math.random() * this.randomScheme.colors.length);
-    let randomColorWithAlpha = this.randomScheme.colors[this.randomColorIndex] + "10"; // 这里添加的 "80" 表示透明度为 50%
+    let randomColorWithAlpha = this.randomScheme.colors[this.randomColorIndex] + "50"; // 这里添加的 "80" 表示透明度为 50%
 
     this.col = color(randomColorWithAlpha)
     this.trans = random(0.5, 0.6);
