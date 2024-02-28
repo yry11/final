@@ -15,7 +15,7 @@ var backgroundShapesCount = 500;
 let oneCircle;
 
 
-var imgNames = ["1.png", "2.png", "3.png", "4.png", "8.png","5.png","3.png", "2.png","1.png", "11.png",];//不同图像的名称
+var imgNames = ["2.png", "1.png", "3.png", "4.png", "8.png","5.png","3.png", "2.png","1.png", "11.png",];//不同图像的名称
 var particles = [];
 var indices = [];//存储粒子可以生成的图像上的有效位置。
 var imgIndex = 0;//跟踪当前图像的索引
