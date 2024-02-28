@@ -3,13 +3,13 @@ let flowerSize;
 let shapes = [];
 const MIN_PARTICLE_COUNT = 9000;//在画布上生成的粒子的最小和最大数量。
 const MAX_PARTICLE_COUNT = 15000;
-const MIN_PARTICLE_SIZE = 0.5;//最小和最大尺寸
-const MAX_PARTICLE_SIZE = 9;
-const MIN_FORCE = 0.1;
-const MAX_FORCE = 0.4;//最小和最大力量将它们移动到目标位置。
-const REPULSION_RADIUS = 40;//当鼠标接近粒子时的排斥半径
+const MIN_PARTICLE_SIZE = 15;//最小和最大尺寸
+const MAX_PARTICLE_SIZE = 30;
+const MIN_FORCE = 0.5;
+const MAX_FORCE = 2;//最小和最大力量将它们移动到目标位置。
+const REPULSION_RADIUS = 60;//当鼠标接近粒子时的排斥半径
 const REPULSION_STRENGTH = 0.5;//和强度
-const IMG_RESIZED_WIDTH = 800;//图像大小
+const IMG_RESIZED_WIDTH = 730;//图像大小
 const IMG_SCAN_STEPS = 2;
 var backgroundShapesCount = 500;
 let oneCircle;
@@ -20,7 +20,7 @@ var particles = [];
 var indices = [];//存储粒子可以生成的图像上的有效位置。
 var imgIndex = 0;//跟踪当前图像的索引
 var drawType = 1;//跟踪当前绘制类型
-var particleCount = 900;//存储要生成的粒子数量
+var particleCount = 1000;//存储要生成的粒子数量
 var maxSize = 0;
 var img;
 var currSchemeIndex = 0;  // 当前的调色板角标
@@ -31,16 +31,19 @@ let back = 0;
 function setup() {
  // blendMode(SOFT_LIGHT);
   // colorMode(HSB, 360, 100, 10, 1.0);
-  createCanvas(1200, 1000);
+  createCanvas(1280, 700);
   // background(0, 1, 95);
   //  frameRate(30);
-  let canvas = createCanvas(800, 700);
-  canvas.canvas.oncontextmenu = () => false;//当用户右键点击画布时，它会阻止默认的右键菜单显示。也就是说，当用户在画布上右键点击时，不会弹出默认的右键菜单，从而防止意外的右键操作。
+ // let canvas = createCanvas(800, 700);
+ // canvas.canvas.oncontextmenu = () => false;//当用户右键点击画布时，它会阻止默认的右键菜单显示。也就是说，当用户在画布上右键点击时，不会弹出默认的右键菜单，从而防止意外的右键操作。
   loadImg(imgNames[0]);//加载第一个图像并进行相应的设置
   noStroke();
   angleMode(DEGREES);
   init();
-  
+  for (let i = 0; i < 5; i++) {
+    shapes.push(new Shape());
+  }
+  frameRate(30);
  
 }
 
@@ -58,36 +61,18 @@ function init() {
 //     pattern(random(width), random(height), random(10, 100), random(3, 10))//边 背景
 //   }
 
-  flowerSize = random(40, 130);
-  for (let i = 0; i < 5; i++) {
-    shapes.push(new Shape());
-  }
-}
-
-function pattern(x, y, radius, edge) {
-  let angle = TWO_PI / edge;
-  beginShape();
-  for (let a = 0; a < TWO_PI; a += angle) {
-    let sx = x + cos(a) * radius;
-    let sy = y + sin(a) * radius;
-    vertex(sx, sy);
-
-  }
-  endShape(CLOSE);
+   flowerSize = random(90, 200);
+  // for (let i = 0; i < 5; i++) {
+  //   shapes.push(new Shape());
+  // }
 }
 
 function draw() {
-    timer++;
-    back++
-  // background(0, 1, 95);
-  if (back = 2500) {
-  // background(0, 1, 95);
-   background(255,1);
-   back=0
-  }
-  if (frameCount > 15000) {
-    noLoop();
-  }
+  if (timer = 600) {
+    // background(0, 1, 95);
+     background(255,3);
+     timer=0
+    }
   if (img == null) {
     return;
   }
@@ -105,7 +90,7 @@ function draw() {
     let original_red = red(particle.color);
     let original_green = green(particle.color);
     let original_blue = blue(particle.color);
-    let new_alpha = 40;
+    let new_alpha = 60;
     // Create a new color with modified alpha
     let new_color = color(original_red, original_green, original_blue, new_alpha);
     // Use the new_color with modified alpha to fill the particles
@@ -130,6 +115,7 @@ function draw() {
       shapes[i].display1();
     else shapes[i].display();
   }
+ 
 }
 
 function mousePressed() {
@@ -317,23 +303,23 @@ class Circle {
   }
 
   bigger() {
-    if (this.r >= 0 && this.r < 30) {
+    if (this.r >= 0 && this.r < 40) {
       this.r += this.plusC;
-    } else if (this.r >= 30 && this.r < 50) {
+    } else if (this.r >= 40 && this.r < 60) {
       this.r += this.plusB;
-    } else if (this.r >= 50 && this.r < random(60, 100)) {
+    } else if (this.r >= 60 && this.r < random(80, 100)) {
       this.r += this.plusA;
     }
   }
   disappear() {
-    if (this.r > 60) {
+    if (this.r > 80) {
       this.trans -= 0.1;
     }
   }
 
   update() {
-    this.xpos += random(-15, 15);
-    this.ypos += random(-15, 15);
+    this.xpos += random(-20, 25);
+    this.ypos += random(-20, 25);
   }
 
   display() {
@@ -402,7 +388,7 @@ class Shape {
 
     this.randomColorIndex = Math.floor(Math.random() * this.randomScheme.colors.length);
     // let randomColorWithAlpha = this.randomScheme.colors[this.randomColorIndex] + "15";
-    let randomColorWithAlpha = this.randomScheme.colors[this.randomColorIndex] + "35";
+    let randomColorWithAlpha = this.randomScheme.colors[this.randomColorIndex] + "55";
     // let randomColorWithNoise = color(randomColorWithAlpha).levels.slice(0, 3).concat(map(noiseAlpha, -50, 50, 0, 255)); // 将随机透明度添加到颜色中
 
 
@@ -414,7 +400,7 @@ class Shape {
       // let col = img.get(this.ox + this.oxRandom, this.oy + this.oyRandom); // 提取图像颜色
       //   this.col = color(col[0], col[1], col[2], 15); // 创建新的颜色对象，并附加透明度
       //  this.col = color(randomColorWithAlpha)
-      this.col = color(235, random(30, 215), 96, 30)
+      this.col = color(235, random(30, 215), 96, 40)
 
     } else {
       //   this.col = color(randomColorWithNoise)
